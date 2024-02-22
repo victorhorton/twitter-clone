@@ -3,7 +3,7 @@ export type User = {
   firstName: string
   lastName: string
   username: string
-  gender: 'male' | 'female'
+  gender: 'male' | 'female' | undefined
   bio: string
 }
 
