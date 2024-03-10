@@ -50,9 +50,11 @@
 
 <script setup lang="ts">
 import router from '@/router'
+import { useUsersStore } from '@/stores/users'
 import { faker } from '@faker-js/faker'
 import { computed, ref } from 'vue'
 
+const usersStore = useUsersStore()
 const firstName = ref('')
 const lastName = ref('')
 
@@ -61,6 +63,14 @@ const username = computed(() => {
 })
 
 function login() {
+  usersStore.setCurrentUser({
+    id: usersStore.users.length,
+    firstName: firstName.value,
+    lastName: lastName.value,
+    username: username.value,
+    gender: undefined,
+    bio: ''
+  })
   localStorage.setItem('token', `${new Date().getTime()}`) // Replace with your actual token
   router.push('/')
 }
