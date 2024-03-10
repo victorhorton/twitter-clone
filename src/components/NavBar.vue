@@ -15,6 +15,12 @@ function logout() {
   <nav class="navbar">
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">Home</router-link>
+      <router-link
+        v-if="usersStore.currentUser"
+        :to="`/profile/${usersStore.currentUser.id}`"
+        class="navbar-link"
+        >Profile</router-link
+      >
       <button type="button" class="btn btn-outline-primary" @click="logout()">Logout</button>
     </div>
   </nav>

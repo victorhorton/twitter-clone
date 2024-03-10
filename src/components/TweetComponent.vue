@@ -4,7 +4,7 @@ import { defineProps, type PropType } from 'vue'
 
 const props = defineProps({
   tweet: { type: Object as PropType<Tweet>, required: true },
-  user: { type: Object as PropType<User>, required: true }
+  user: { type: Object as PropType<User> }
 })
 </script>
 
@@ -13,7 +13,7 @@ const props = defineProps({
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 v-if="props.user" class="card-title">
             {{ props.user.username }}
           </h5>
           <p class="card-text">

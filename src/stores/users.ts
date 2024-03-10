@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import { usersData } from '../../data'
@@ -6,11 +6,7 @@ import type { User } from '@/types/dataTypes'
 
 export const useUsersStore = defineStore('users', () => {
   const users = ref(usersData)
-  const currentUser = ref({
-    firstName: '',
-    lastName: '',
-    username: ''
-  })
+  const currentUser: Ref<User | undefined> = ref()
   const isLoggedIn = ref(false)
 
   onMounted(() => {
