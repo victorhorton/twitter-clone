@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { defineStore } from 'pinia'
 
 import { usersData } from '../../data'
@@ -11,11 +11,20 @@ export const useUsersStore = defineStore('users', () => {
     lastName: '',
     username: ''
   })
+  const isLoggedIn = ref(false)
+
+  onMounted(() => {
+    if (localStorage.getItem('token') == undefined) {
+      isLoggedIn.value = false
+    } else {
+      isLoggedIn.value = true
+    }
+  })
 
   function setCurrentUser(user: User): void {
     currentUser.value = user
     const foundUser = users.value.find((existingUser) => {
-      existingUser.id === user.id
+      existingUser.firstName === user.firstName && existingUser.lastName === user.lastName
     })
 
     if (foundUser === undefined) {
@@ -23,5 +32,5 @@ export const useUsersStore = defineStore('users', () => {
     }
   }
 
-  return { users, currentUser, setCurrentUser }
+  return { users, currentUser, isLoggedIn, setCurrentUser }
 })

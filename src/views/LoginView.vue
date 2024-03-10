@@ -71,7 +71,8 @@ function login() {
     gender: undefined,
     bio: ''
   })
-  localStorage.setItem('token', `${new Date().getTime()}`) // Replace with your actual token
+  localStorage.setItem('token', `${new Date().getTime()}`)
+  usersStore.isLoggedIn = true
   router.push('/')
 }
 </script>
